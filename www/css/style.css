@@ -1,0 +1,22 @@
+/* Empty. Add your own CSS if you like */
+@font-face {
+  font-family: 'flowing';
+  src: url('../fonts/BLESD___.otf');
+}
+
+.bar{
+
+}
+
+.bar .title{
+  font-family: flowing;
+  font-size: 34px !important
+}
+
+.question-container{transform: none}
+.question-container.ng-hide-add{transition: all 0.5s ease 0.5s;}
+.question-container.ng-hide-remove{transition: all 0.5s ease 0.5s;}
+.question-container.ng-hide{opacity: 0; transform: translateX(100%);}
+.question-container.ng-show{opacity: 1;}
+
+.question-container .question-card .question{white-space: inherit;}
