@@ -1,28 +1,10 @@
 var test = {
-  template: "<div>This is a test</div>",
+  templateUrl: "js/components/test-component/test.html",
   controller: function ($state){
     console.log('Test Controller');
   }
 };
 
-console.log(test);
-
 angular.module('quizzter')
-  .component('test', test)
-  .config(function($stateProvider, $urlRouterProvider){
+  .component('test', test);
 
-    console.log('aaaa');
-    $stateProvider
-      .state('home.test', {
-        url: 'test',
-        views: {
-          "@homeLayout": {
-            template: '<div>This is another shit</div>'
-          }
-        }
-    });
-
-
-  });
-
-/*template: '<test></test>'*/

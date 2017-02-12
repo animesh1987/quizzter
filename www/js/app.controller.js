@@ -37,9 +37,13 @@ var data = [
     "GroupId": "7" }
 ]
 
-var controller = function(){
+var controller = function($state, questions){
+  console.log(questions);
   var vm = this;
-  vm.data = data;
+  if(!!$state.params && !!$state.params.questions){
+    vm.questions = $state.params.questions
+  }
+  vm.data = questions;
 
   vm.currentQuestion = 1;
 
@@ -47,7 +51,7 @@ var controller = function(){
     vm.currentQuestion = vm.currentQuestion + 1;
     console.log(vm.currentQuestion);
     vm.selectedAnswer = null;
-  }
+  };
 
   vm.selectAnswer = function(data){
     vm.selectedAnswer.substr(vm.selectedAnswer.length - 1)

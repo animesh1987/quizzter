@@ -1,7 +1,12 @@
-<ion-content class="padding has-header question-container"
+<ion-view>
+  <ion-nav-title>
+    {{$ctrl.currentQuestion}}/{{$ctrl.questions}}
+  </ion-nav-title>
+
+  <ion-content class="padding has-header question-container"
              scroll="false"
-             ng-repeat="data in vm.data"
-             ng-show="$index == vm.currentQuestion - 1">
+             ng-repeat="data in $ctrl.data track by $index"
+             ng-show="$index == $ctrl.currentQuestion - 1">
 
   <div class="card question-card">
     <div class="item question item-divider" layout-padding>
@@ -19,7 +24,7 @@
 
       </ion-list>-->
 
-      <md-radio-group ng-model="vm.selectedAnswer" ng-change="vm.selectAnswer(data)">
+      <md-radio-group ng-model="$ctrl.selectedAnswer" ng-change="$ctrl.selectAnswer(data)">
 
         <div layout='column' layout-padding layout-align="center start">
           <md-radio-button value="data.OptA" >{{data.OptA}}</md-radio-button>
@@ -34,35 +39,51 @@
     </div>
 
     <div class="item item-divider">
-      {{data[vm.selectedAnswer.substr(vm.selectedAnswer.length - 4)]}}
+      {{data[$ctrl.selectedAnswer.substr($ctrl.selectedAnswer.length - 4)]}}
     </div>
   </div>
 
+    <md-button class="md-button md-raised"
+               ng-if="$index != ($ctrl.data.length - 1)"
+               ng-click="$ctrl.nextQuestion($index)"
+    >
+      Next
+    </md-button>
+
+    <button class="button md-raised icon-right button-full ion-checkmark-circled button-assertive"
+            ng-if="$index == ($ctrl.data.length - 1)"
+            ng-click="$ctrl.finishQuestion()">
+      Finish
+    </button>
+
 </ion-content>
+</ion-view>
 
 
-<!--<md-button class="md-button md-raised"
-             ng-if="$index != (vm.data.length - 1)"
-             ng-click="vm.nextQuestion($index)"
+<!--
+<md-button class="md-button md-raised"
+             ng-if="$index != ($ctrl.data.length - 1)"
+             ng-click="$ctrl.nextQuestion($index)"
   >
     Next
-  </md-button>-->
+  </md-button>
 
-<!--<button class="button md-raised icon-right ion-chevron-right button-full button-balanced"
-        ng-if="$index != (vm.data.length - 1)"
-        ng-click="vm.nextQuestion($index)">
+<button class="button md-raised icon-right ion-chevron-right button-full button-balanced"
+        ng-if="$index != ($ctrl.data.length - 1)"
+        ng-click="$ctrl.nextQuestion($index)">
    Next
 </button>
 
 <button class="button md-raised icon-right button-full ion-checkmark-circled button-assertive"
-        ng-if="$index == (vm.data.length - 1)"
-        ng-click="vm.finishQuestion()">
+        ng-if="$index == ($ctrl.data.length - 1)"
+        ng-click="$ctrl.finishQuestion()">
   Finish
-</button>-->
+</button>
 
-<!--<md-button class="md-button md-raised"
-           ng-if="$index == (vm.data.length - 1)"
-           ng-click="vm.finishQuestion()"
+<md-button class="md-button md-raised"
+           ng-if="$index == ($ctrl.data.length - 1)"
+           ng-click="$ctrl.finishQuestion()"
 >
   Finish
-</md-button>-->
+</md-button>
+-->
