@@ -38,28 +38,54 @@ var data = [
 ]
 
 var controller = function($state, questions){
-  console.log(questions);
+
   var vm = this;
+
+  vm.show = false;
+
   if(!!$state.params && !!$state.params.questions){
     vm.questions = $state.params.questions
   }
+
   vm.data = questions;
 
-  vm.currentQuestion = 1;
-
-  vm.nextQuestion = function(){
-    vm.currentQuestion = vm.currentQuestion + 1;
-    console.log(vm.currentQuestion);
-    vm.selectedAnswer = null;
-  };
-
-  vm.selectAnswer = function(data){
-    vm.selectedAnswer.substr(vm.selectedAnswer.length - 1)
-    if(data.Answer == vm.selectedAnswer.substr(vm.selectedAnswer.length - 1)){
-      console.log(vm.selectedAnswer);
-    }
+  if(vm.data && vm.data.length > 0){
+    _.each(vm.data, function(question){
+      question.answered = {answered: false, optionSelected: null, isCorrect: null}
+    })
   }
+  vm.totalAnswered = 0;
+  vm.correctAnswer = null;
+  vm.currentQuestion = 0;
+  vm.startTimer = true;
+  vm.stopTimer = false;
+
+  _.extend(vm, {
+    nextQuestion: function(){
+      vm.currentQuestion = vm.currentQuestion + 1;
+      vm.correctAnswer = null;
+      vm.selectedAnswer = null;
+    },
+    previousQuestion: function(){
+      vm.currentQuestion = vm.currentQuestion - 1;
+      console.log(vm.currentQuestion);
+      vm.selectedAnswer = null;
+    },
+    selectAnswer: function(data, selection){
+      vm.selectedAnswer = selection;
+      vm.correctAnswer = (data.Answer === vm.selectedAnswer) ? true : false;
+      if(data.answered && !data.answered.answered){
+        data.answered = {answered: true, optionSelected: selection, isCorrect: vm.correctAnswer};
+        vm.totalAnswered++;
+      }
+      return
+    },
+    finish: function () {
+     console.log('Finish Questionnaire');
+    }
+  });
+
 };
 
-angular.module('quizzter').controller('AppController', controller);
+angular.module('quizzter').controller('QuickQuestionCtrl', controller);
 

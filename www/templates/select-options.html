@@ -1,49 +1,32 @@
-<ion-view>
-  <ion-nav-title>
-    {{$ctrl.title}}
-    <!--<h1 class="white-color height-100 md-headline padding-top-5">{{$ctrl.title}}</h1>-->
-  </ion-nav-title>
+<ion-view view-title="{{$ctrl.title}}">
 
-  <ion-content class="has-header">
-    <div layout="column" class="padding height-100">
+  <ion-content class="col button-container" scroll="false">
 
-      <md-button nav-direction="forward"
-                 flex="25"
-                 class="button md-raised button-block button-positive button-half-way"
-                 nav-transition="ios"
-                 ui-sref="quick-quiz({questions: 5})">
+      <button ui-sref="quick-quiz({questions: 5})"
+              nav-direction="forward"
+              class="button button-positive button-block row-20">
         Answer 5 questions
-      </md-button>
+      </button>
 
-      <md-button nav-direction="forward"
-                 flex="25"
-                 class="button md-raised button-block button-balanced button-half-way"
-                 nav-transition="ios"
-                 ui-sref="quick-quiz({questions: 10})">
+      <button ui-sref="quick-quiz({questions: 5})"
+              nav-direction="forward"
+              class="button button-balanced button-block">
         Answer 10 questions
-      </md-button>
+      </button>
 
-      <md-button nav-direction="forward"
-                 flex="25"
-                 class="button md-raised button-block button-assertive button-half-way"
-                 nav-transition="ios"
-                 ui-sref="quick-quiz({questions: 25})">
-        Answer 25 questions
-      </md-button>
+      <button ui-sref="quick-quiz({questions: 5})"
+              nav-direction="forward"
+              class="button button-assertive button-block">
+        Answer 20 questions
+      </button>
 
-      <md-button nav-direction="forward"
-                 flex="25"
-                 class="button md-raised button-block button-dark button-half-way"
-                 nav-transition="ios"
-                 ui-sref="quick-quiz({questions: 50})">
-        Answer 50 questions
-      </md-button>
-    </div>
+      <button ui-sref="quick-quiz({questions: 5})"
+              nav-direction="forward"
+              class="button button-dark button-block">
+        Answer 30 questions
+      </button>
 
   </ion-content>
 
 </ion-view>
-
-
-<!--ui-sref="properties({state: state.value})"-->
 

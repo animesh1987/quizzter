@@ -10,14 +10,13 @@ angular.module('quizzter')
         controller: 'SelectOptionsController as $ctrl'
       })
       .state('quick-quiz', {
-        url: '/quick-quiz?questions',
+        url: '/quick-quiz:questions',
         templateUrl: "templates/app-body.html",
-        controller: 'AppController as $ctrl',
+        controller: 'QuickQuestionCtrl as $ctrl',
         resolve: {
           questions: function(dataFactory, $stateParams){
             selections = []
             for (var i = 0; i < parseInt($stateParams.questions); i++){
-              console.log(i);
               selections.push(dataFactory.data[Math.floor(Math.random() * dataFactory.data.length)])
             }
             return selections;

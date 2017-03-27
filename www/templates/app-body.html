@@ -1,89 +1,113 @@
-<ion-view>
-  <ion-nav-title>
-    {{$ctrl.currentQuestion}}/{{$ctrl.questions}}
-  </ion-nav-title>
+<ion-view quiz-progress-indicator total-answered="{{$ctrl.totalAnswered}}"
+  view-title="{{$ctrl.currentQuestion + 1}}/{{$ctrl.questions}}">
 
-  <ion-content class="padding has-header question-container"
-             scroll="false"
-             ng-repeat="data in $ctrl.data track by $index"
-             ng-show="$index == $ctrl.currentQuestion - 1">
+  <!--quiz-progress-indicator="{'total-answered': {{$ctrl.totalAnswered}} }"-->
 
-  <div class="card question-card">
-    <div class="item question item-divider" layout-padding>
-      {{data.Question}}
-    </div>
+  <ion-content class="question-container has-header"
+               scroll="false">
 
-    <div class="item item-text-wrap">
-      <!--<ion-list>
+    <div class="card question-card"
+         ng-repeat="data in $ctrl.data track by $index"
+         ng-if="$index == $ctrl.currentQuestion"
+         ng-class="{'animate-forward': $index != 0}">
+      <div class="item question item-divider padding">
+        {{data.Question}}
+      </div>
 
-        <ion-checkbox>{{data.OptA}}</ion-checkbox>
-        <ion-checkbox>{{data.OptB}}</ion-checkbox>
-        <ion-checkbox>{{data.OptC}}</ion-checkbox>
-        <ion-checkbox>{{data.OptD}}</ion-checkbox>
-        <ion-checkbox>{{data.OptE}}</ion-checkbox>
+      <div class="item item-text-wrap padding">
 
-      </ion-list>-->
+        <ion-list>
+          <ion-item class="item-icon-right"
+                    ng-click="$ctrl.selectAnswer(data, 'A')">
 
-      <md-radio-group ng-model="$ctrl.selectedAnswer" ng-change="$ctrl.selectAnswer(data)">
+            <div>{{data.OptA | optionFormat}}</div>
 
-        <div layout='column' layout-padding layout-align="center start">
-          <md-radio-button value="data.OptA" >{{data.OptA}}</md-radio-button>
-          <md-radio-button value="data.OptB" > {{data.OptB}} </md-radio-button>
-          <md-radio-button value="data.OptC" >{{data.OptC}}</md-radio-button>
-          <md-radio-button value="data.OptD" >{{data.OptD}}</md-radio-button>
-          <md-radio-button value="data.OptE" >{{data.OptE}}</md-radio-button>
-        </div>
+            <i ng-show="$ctrl.selectedAnswer == 'A' && !$ctrl.correctAnswer"
+               class="icon ion-close-round assertive"></i>
 
-      </md-radio-group>
+            <i ng-show="$ctrl.selectedAnswer == 'A' && $ctrl.correctAnswer"
+               class="icon ion-checkmark-round balanced"></i>
 
-    </div>
+          </ion-item>
 
-    <div class="item item-divider">
-      {{data[$ctrl.selectedAnswer.substr($ctrl.selectedAnswer.length - 4)]}}
-    </div>
+          <ion-item class="item-icon-right"
+                    ng-click="$ctrl.selectAnswer(data, 'B')">
+            <div>{{data.OptB | optionFormat}}</div>
+
+            <i ng-show="$ctrl.selectedAnswer == 'B' && !$ctrl.correctAnswer"
+               class="icon ion-close-round assertive"></i>
+
+            <i ng-show="$ctrl.selectedAnswer == 'B' && $ctrl.correctAnswer"
+               class="icon ion-checkmark-round balanced"></i>
+          </ion-item>
+
+          <ion-item class="item-icon-right"
+                    ng-click="$ctrl.selectAnswer(data, 'C')">
+            <div>{{data.OptC | optionFormat}}</div>
+            <i ng-show="$ctrl.selectedAnswer == 'C' && !$ctrl.correctAnswer"
+               class="icon ion-close-round assertive"></i>
+
+            <i ng-show="$ctrl.selectedAnswer == 'C' && $ctrl.correctAnswer"
+               class="icon ion-checkmark-round balanced"></i>
+          </ion-item>
+
+          <ion-item class="item-icon-right"
+                    ng-click="$ctrl.selectAnswer(data, 'D')">
+            <div>{{data.OptD | optionFormat}}</div>
+
+            <i ng-show="$ctrl.selectedAnswer == 'D' && !$ctrl.correctAnswer"
+               class="icon ion-close-round assertive"></i>
+
+            <i ng-show="$ctrl.selectedAnswer == 'D' && $ctrl.correctAnswer"
+               class="icon ion-checkmark-round balanced"></i>
+          </ion-item>
+
+          <ion-item class="item-icon-right"
+                    ng-click="$ctrl.selectAnswer(data, 'E')">
+            <div>{{data.OptE | optionFormat}}</div>
+
+            <i ng-show="$ctrl.selectedAnswer == 'E' && !$ctrl.correctAnswer"
+               class="icon ion-close-round assertive"></i>
+
+            <i ng-show="$ctrl.selectedAnswer == 'E' && $ctrl.correctAnswer"
+               class="icon ion-checkmark-round balanced"></i>
+          </ion-item>
+
+        </ion-list>
+
+      </div>
+
   </div>
 
-    <md-button class="md-button md-raised"
-               ng-if="$index != ($ctrl.data.length - 1)"
-               ng-click="$ctrl.nextQuestion($index)"
-    >
-      Next
-    </md-button>
+    <div>Total Answered: {{$ctrl.totalAnswered}}</div>
 
-    <button class="button md-raised icon-right button-full ion-checkmark-circled button-assertive"
-            ng-if="$index == ($ctrl.data.length - 1)"
-            ng-click="$ctrl.finishQuestion()">
-      Finish
-    </button>
+    <ion-footer-bar class="bar-stable" >
+
+      <button class="button button-assertive button-clear"
+              ng-show="$ctrl.currentQuestion != 0"
+              ng-click="$ctrl.previousQuestion()" >
+        <i class="ion-chevron-left" ></i >
+        &nbsp;Back
+      </button >
+
+      <countdown-timer
+                       start-timer="{{$ctrl.startTimer}}"
+                       stop-timer="{{$ctrl.stopTimer}}"></countdown-timer>
+
+      <button class="button button-balanced button-clear pull-right"
+              ng-show="$ctrl.currentQuestion + 1 < $ctrl.data.length "
+              ng-click="$ctrl.nextQuestion()" >
+        Next
+        &nbsp;<i class="ion-chevron-right" ></i >
+      </button >
+
+      <button class="button button-positive button-clear pull-right"
+              ng-show="$ctrl.currentQuestion + 1 == $ctrl.data.length"
+              ng-click="$ctrl.finish()" >
+        Finish
+        &nbsp;<i class="ion-chevron-right" ></i >
+      </button >
+    </ion-footer-bar >
 
 </ion-content>
 </ion-view>
-
-
-<!--
-<md-button class="md-button md-raised"
-             ng-if="$index != ($ctrl.data.length - 1)"
-             ng-click="$ctrl.nextQuestion($index)"
-  >
-    Next
-  </md-button>
-
-<button class="button md-raised icon-right ion-chevron-right button-full button-balanced"
-        ng-if="$index != ($ctrl.data.length - 1)"
-        ng-click="$ctrl.nextQuestion($index)">
-   Next
-</button>
-
-<button class="button md-raised icon-right button-full ion-checkmark-circled button-assertive"
-        ng-if="$index == ($ctrl.data.length - 1)"
-        ng-click="$ctrl.finishQuestion()">
-  Finish
-</button>
-
-<md-button class="md-button md-raised"
-           ng-if="$index == ($ctrl.data.length - 1)"
-           ng-click="$ctrl.finishQuestion()"
->
-  Finish
-</md-button>
--->
