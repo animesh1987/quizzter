@@ -5,11 +5,26 @@ function countdownTimer(){
     restrict: 'A',
     link: function(scope, element, attrs) {
 
-      attrs.$observe('totalAnswered', function(value){
-        console.log(value);
-        console.log(element);
-        document.querySelector('.nav-bar-container.bar-royal');
-      })
+      var transformValue = -100;
+      var newDiv = document.createElement('div');
+      newDiv.id = 'progress-indicator';
+      var activeNavContainer = document.querySelector('.nav-bar-container.bar-royal .nav-bar-block[nav-bar="cached"]');
+      var activeNav = document.querySelector('.nav-bar-container.bar-royal .nav-bar-block[nav-bar="cached"] .bar-header');
+      newDiv.style.height = activeNav.clientHeight + 'px';
+      newDiv.style.background = '#33cd5f';
+      newDiv.style.transition = 'all 0.5s ease';
+      newDiv.style.webkitTransform = 'translate3d('+ transformValue + '%, 0, 0)';
+      console.log(newDiv);
+      activeNavContainer.appendChild(newDiv);
+
+      attrs.$observe('totalProgress', function(value){
+        transformValue = -100 + value * 100;
+        newDiv.style.webkitTransform = 'translate3d('+ transformValue + '%, 0, 0)';
+      });
+
+      scope.$on('$destroy', function () {
+        document.getElementById('progress-indicator').remove();
+      });
     }
   }
 }

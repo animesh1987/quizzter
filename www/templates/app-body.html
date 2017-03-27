@@ -1,4 +1,5 @@
-<ion-view quiz-progress-indicator total-answered="{{$ctrl.totalAnswered}}"
+
+<ion-view quiz-progress-indicator total-progress="{{$ctrl.totalAnswered/$ctrl.questions}}"
   view-title="{{$ctrl.currentQuestion + 1}}/{{$ctrl.questions}}">
 
   <!--quiz-progress-indicator="{'total-answered': {{$ctrl.totalAnswered}} }"-->
@@ -79,7 +80,7 @@
 
   </div>
 
-    <div>Total Answered: {{$ctrl.totalAnswered}}</div>
+    <!--<div>Total Answered: {{$ctrl.totalAnswered}}</div>-->
 
     <ion-footer-bar class="bar-stable" >
 

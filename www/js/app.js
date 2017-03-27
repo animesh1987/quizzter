@@ -1,3 +1,7 @@
+var onReady = function() {
+  return angular.bootstrap(document, ['quizzter']);
+};
+
 angular.module('quizzter', ['ngMaterial', 'ui.router', 'ionic'])
   .run(function($ionicPlatform) {
     $ionicPlatform.ready(function() {
@@ -19,3 +23,11 @@ angular.module('quizzter', ['ngMaterial', 'ui.router', 'ionic'])
   .config(function ($mdGestureProvider) {
     $mdGestureProvider.skipClickHijack();
   });
+
+if(window.isCordova){
+  console.log('ISCordova');
+  angular.element(document).on('deviceready', onReady);
+}
+else{
+  angular.element(document).ready(onReady);
+}

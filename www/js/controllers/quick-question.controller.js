@@ -68,10 +68,12 @@ var controller = function($state, questions){
     },
     previousQuestion: function(){
       vm.currentQuestion = vm.currentQuestion - 1;
-      console.log(vm.currentQuestion);
       vm.selectedAnswer = null;
     },
     selectAnswer: function(data, selection){
+      if(data.answered && data.answered.answered){
+        return ;
+      }
       vm.selectedAnswer = selection;
       vm.correctAnswer = (data.Answer === vm.selectedAnswer) ? true : false;
       if(data.answered && !data.answered.answered){
@@ -81,7 +83,7 @@ var controller = function($state, questions){
       return
     },
     finish: function () {
-     console.log('Finish Questionnaire');
+      vm.stopTimer = true;
     }
   });
 

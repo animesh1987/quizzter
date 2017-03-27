@@ -38,6 +38,12 @@ function countdownTimer($interval){
         }
       });
 
+      attrs.$observe('stopTimer', function(value){
+        if(scope.$eval(value)){
+          $interval.cancel(intervalFunction);
+        }
+      });
+
       scope.$on('$destroy', function () {
         $interval.cancel(intervalFunction);
       });

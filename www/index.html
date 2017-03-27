@@ -16,7 +16,7 @@
       }
     </script>-->
     <link rel="stylesheet" href="lib/angular-material/angular-material.min.css">
-    <link href="lib/ionic/css/ionic.css" rel="stylesheet">
+    <link href="css/ionic.app.css" rel="stylesheet">
     <link href="css/animations.css" rel="stylesheet">
     <link href="css/style.css" rel="stylesheet">
     <!-- IF using Sass (run gulp sass first), then uncomment below and remove the CSS includes above
@@ -42,25 +42,19 @@
     <script src="js/directives/progressIndicator.directive.js"></script>
     <script src="js/data.service.js"></script>
     <script src="js/filters/optionFormat-filter.js"></script>
+    <script src="js/controllers/main.controller.js"></script>
     <script src="js/controllers/quick-question.controller.js"></script>
     <script src="js/controllers/select-options.controller.js"></script>
     <script src="js/states.js"></script>
   </head>
-  <body ng-app="quizzter" >
+  <body  ><!--ng-app="quizzter"-->
 
-    <ion-nav-bar class="bar-royal md-whiteframe-1dp">
-      <ion-nav-back-button >
+    <ion-nav-bar class="bar-royal md-whiteframe-1dp" ng-controller="mainCtrl as main">
+      <ion-nav-back-button ng-click="main.GoBack()">
       </ion-nav-back-button >
     </ion-nav-bar >
 
     <ion-nav-view ></ion-nav-view >
 
-    <!--<ion-nav-bar class="bar-royal md-whiteframe-1dp" align-title="center">
-        <ion-nav-back-button></ion-nav-back-button>
-    </ion-nav-bar>
-
-    <ion-nav-view></ion-nav-view>-->
-
-      <!--<div ng-include=" './templates/app-body.html' "></div>-->
   </body>
 </html>
