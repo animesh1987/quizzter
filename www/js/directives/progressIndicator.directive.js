@@ -14,7 +14,6 @@ function countdownTimer(){
       newDiv.style.background = '#33cd5f';
       newDiv.style.transition = 'all 0.5s ease';
       newDiv.style.webkitTransform = 'translate3d('+ transformValue + '%, 0, 0)';
-      console.log(newDiv);
       activeNavContainer.appendChild(newDiv);
 
       attrs.$observe('totalProgress', function(value){

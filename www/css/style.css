@@ -37,9 +37,14 @@
 /*for app body*/
 
 .animate-forward.ng-enter{-webkit-animation: slideInLeft 0.7s forwards ease-in-out; }
-/*.question-container.ng-enter.ng-enter-active{opacity: 1;}*/
+
 .question-container .question-card .question{white-space: inherit;}
 
+.selected{background: #FCE4EC !important;}
+
+/*action container*/
+.action-container{opacity:1; transition: all 0.7s ease;}
+.action-container.ng-hide{opacity: 0;}
 
 /*timer*/
 .timer{padding: 5px; font-size: 30px; position: absolute; left: 35%;}
