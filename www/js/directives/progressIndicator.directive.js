@@ -1,5 +1,5 @@
 
-function countdownTimer(){
+function progressIndicator(){
 
   return {
     restrict: 'A',
@@ -28,4 +28,4 @@ function countdownTimer(){
   }
 }
 
-angular.module('quizzter').directive('quizProgressIndicator', countdownTimer);
+angular.module('quizzter').directive('quizProgressIndicator', progressIndicator);

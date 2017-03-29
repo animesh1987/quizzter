@@ -5,7 +5,7 @@ function formatNumber(number) {
   return number;
 }
 
-function countdownTimer($interval){
+function countdownTimer($interval, resultFactory){
 
   return {
     restrict: 'E',
@@ -40,6 +40,7 @@ function countdownTimer($interval){
 
       attrs.$observe('stopTimer', function(value){
         if(scope.$eval(value)){
+          resultFactory.timetaken = {minutes: minutes, seconds: seconds};
           $interval.cancel(intervalFunction);
         }
       });

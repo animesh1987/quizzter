@@ -1,4 +1,4 @@
-var controller = function($scope, $state, questions, $ionicModal){
+var controller = function($scope, $state, questions, $ionicModal, resultFactory){
 
   var vm = this;
 
@@ -21,13 +21,6 @@ var controller = function($scope, $state, questions, $ionicModal){
   vm.currentQuestion = 0;
   vm.startTimer = true;
   vm.stopTimer = false;
-
-  $ionicModal.fromTemplateUrl('templates/result-modal.html', {
-    scope: $scope,
-    animation: 'slide-in-up'
-  }).then(function (modal) {
-    vm.modal = modal;
-  });
 
   _.extend(vm, {
     nextQuestion: function(){
@@ -58,10 +51,22 @@ var controller = function($scope, $state, questions, $ionicModal){
       return
     },
     finish: function () {
-      console.log(_.map(vm.data, function (data) {return data.answered}));
+      //console.log(_.map(vm.data, function (data) {return data.answered}));
       vm.stopTimer = true;
-      vm.modal.show();
+      resultFactory.resultData = vm.data;
+      $ionicModal.fromTemplateUrl('templates/result-modal.html', {
+        scope: $scope,
+        animation: 'slide-in-up'
+      }).then(function (modal) {
+        vm.modal = modal;
+        vm.modal.show();
+      });
     }
+  });
+
+  $scope.$on('$destroy', function() {
+    vm.modal.hide();
+    vm.modal.remove();
   });
 
 };
