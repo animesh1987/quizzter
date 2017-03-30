@@ -7,36 +7,45 @@
     <h1 class="title">Final Results</h1>
   </ion-header-bar>
 
-  <ion-content class="has-header padding">
-    <p>{{modalctrl.timeNow | date:'medium'}}</p>
-    <p>
-      <span>Total Questions</span>
-      <span>{{::modalctrl.results.getCorrectAnswers().totalQuestions}}</span>
-    </p>
+  <div class="bar bar-subheader background-modal" layout="row">
+    <div class="padding-top-10 text-align-right" flex="100">
+      {{modalctrl.timeNow | date:'medium'}}
+    </div>
+  </div>
 
-    <p>
-      <span>Total Answered</span>
-      <span>{{::modalctrl.results.getCorrectAnswers().answered}}</span>
-    </p>
+  <ion-content class="has-header padding background-modal">
 
-    <p>
-      <span>Answered Correctly</span>
-      <span>{{::modalctrl.results.getCorrectAnswers().correctAnswer}}</span>
-    </p>
+    <div class="card padding results-container col">
+      <div class="circle-container md-whiteframe-1dp col-offset-20">
+        <div class="md-display-3 royal">
+          {{modalctrl.results.getCorrectAnswers().correctAnswer/modalctrl.results.getCorrectAnswers().totalQuestions * 100}}%
+        </div>
+      </div>
 
-    <div class="column">
-      <p class="row">
-        <span>Time Taken</span>
-        <strong><span>{{::modalctrl.results.timetaken.minutes}}</span>:<span>{{::modalctrl.results.timetaken.seconds}}</span></strong>
-      </p>
+      <div class="row padding-top-10 md-subhead">
 
-      <p class="row">
-        <span>Exam Score</span>
-        <strong>
-          <span>{{modalctrl.results.getCorrectAnswers().correctAnswer/modalctrl.results.getCorrectAnswers().totalQuestions * 100}}%</span>
-        </strong>
-      </p>
+        <p class=" text-align-center">
+          <span class="md-headline color-black-054"><strong>{{::modalctrl.results.getCorrectAnswers().totalQuestions}}</strong></span>
+          <span class="col color-black-087">Total Questions</span>
+        </p>
 
+        <span flex></span>
+
+        <p class="text-align-center">
+          <span class="md-headline color-black-054"><strong>{{::modalctrl.results.getCorrectAnswers().correctAnswer}}</strong></span>
+          <span class="col color-black-087">Answered Correctly</span>
+        </p>
+      </div>
+
+    </div>
+
+    <div class="card padding text-align-center">
+        <span class="md-headline color-black-054 col">Quiz Completed In</span>
+        <div class="md-display-1">
+          <strong>
+            <span>{{::modalctrl.formatNumber(modalctrl.results.timetaken.minutes)}}</span>:<span>{{::modalctrl.formatNumber(modalctrl.results.timetaken.seconds)}}</span>
+          </strong>
+        </div>
     </div>
   </ion-content>
 

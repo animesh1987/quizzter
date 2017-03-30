@@ -49,3 +49,10 @@
 /*timer*/
 .timer{padding: 5px; font-size: 30px; position: absolute; left: 35%;}
 
+/*circle*/
+.results-container{ height:60%;}
+.circle-container{border: 10px solid #EF5350; width: 60%; height: 60%; border-radius: 50%; background-color: #fff; margin-top: 10%;}
+.circle-container div{text-align: center; margin-top: 35%; font-weight: 300;}
+
+.background-modal{background: #F0F3F8;}
+
