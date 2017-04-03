@@ -1,4 +1,4 @@
-var resultModal = function($scope, resultFactory, $state){
+var resultModal = function($scope, resultFactory, $state, $ionicModal, $ionicPopup){
 
   var vm = this;
 
@@ -15,13 +15,19 @@ var resultModal = function($scope, resultFactory, $state){
     return number;
   };
 
-
-  console.log(resultFactory);
-
   vm.hide = function () {
+    resultFactory.resultModal.hide();
+    $ionicModal.stack.remove(resultFactory.resultModal);
     $state.go('home');
-    console.log('hide modal');
+    console.log('hide modal', $ionicModal);
   };
+
+  vm.showDetail = function (question, $event) {
+    console.log(question);
+    /*$ionicPopup.show(
+      template: "<div>{{vm.}}</div>"
+    )*/
+  }
 
 };
 

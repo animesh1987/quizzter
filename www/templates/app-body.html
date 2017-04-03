@@ -3,139 +3,133 @@
   view-title="{{$ctrl.currentQuestion + 1}}/{{$ctrl.questions}}">
 
   <ion-content class="question-container has-header"
-               scroll="false">
+               ><!--scroll="false"-->
+      <div class="card question-card card-margin-offset"
+           ng-repeat="data in $ctrl.data track by $index"
+           ng-if="$index == $ctrl.currentQuestion"
+           ng-class="{'animate-forward': $index != 0}">
+        <div class="item question item-divider padding">
+          {{data.Question}}
+        </div>
 
-    <div class="card question-card"
-         ng-repeat="data in $ctrl.data track by $index"
-         ng-if="$index == $ctrl.currentQuestion"
-         ng-class="{'animate-forward': $index != 0}">
-      <div class="item question item-divider padding">
-        {{data.Question}}
+        <div class="item item-text-wrap padding">
+
+          <ion-list>
+            <ion-item class="item-icon-right"
+                      ng-class="{'selected': $ctrl.selectedAnswer == 'A'}"
+                      ng-click="$ctrl.selectAnswer(data, 'A')">
+
+              <div>{{data.OptA | optionFormat}}</div>
+
+              <i class="icon"
+                 ng-show=" $ctrl.selectedAnswer == 'A' && data.answered.answered "
+                 ng-class="{
+                'ion-close-round assertive': $ctrl.correctAnswer == false,
+                'ion-checkmark-round balanced': $ctrl.correctAnswer}"></i>
+
+            </ion-item>
+
+            <ion-item class="item-icon-right"
+                      ng-class="{'selected': $ctrl.selectedAnswer == 'B'}"
+                      ng-click="$ctrl.selectAnswer(data, 'B')">
+              <div>{{data.OptB | optionFormat}}</div>
+
+              <i class="icon"
+                 ng-show=" $ctrl.selectedAnswer == 'B' && data.answered.answered "
+                 ng-class="{
+                'ion-close-round assertive': $ctrl.correctAnswer == false,
+                'ion-checkmark-round balanced': $ctrl.correctAnswer}"></i>
+
+            </ion-item>
+
+            <ion-item class="item-icon-right"
+                      ng-class="{'selected': $ctrl.selectedAnswer == 'C'}"
+                      ng-click="$ctrl.selectAnswer(data, 'C')">
+              <div>{{data.OptC | optionFormat}}</div>
+
+              <i class="icon"
+                 ng-show=" $ctrl.selectedAnswer == 'C' && data.answered.answered "
+                 ng-class="{
+                'ion-close-round assertive': $ctrl.correctAnswer == false,
+                'ion-checkmark-round balanced': $ctrl.correctAnswer}"></i>
+
+            </ion-item>
+
+            <ion-item class="item-icon-right"
+                      ng-class="{'selected': $ctrl.selectedAnswer == 'D'}"
+                      ng-click="$ctrl.selectAnswer(data, 'D')">
+              <div>{{data.OptD | optionFormat}}</div>
+
+              <i class="icon"
+                 ng-show=" $ctrl.selectedAnswer == 'D' && data.answered.answered "
+                 ng-class="{
+                'ion-close-round assertive': $ctrl.correctAnswer == false,
+                'ion-checkmark-round balanced': $ctrl.correctAnswer}"></i>
+
+            </ion-item>
+
+            <ion-item class="item-icon-right"
+                      ng-class="{'selected': $ctrl.selectedAnswer == 'E'}"
+                      ng-click="$ctrl.selectAnswer(data, 'E')">
+              <div>{{data.OptE | optionFormat}}</div>
+
+              <i class="icon"
+                 ng-show=" $ctrl.selectedAnswer == 'E' && data.answered.answered "
+                 ng-class="{
+                'ion-close-round assertive': $ctrl.correctAnswer == false,
+                'ion-checkmark-round balanced': $ctrl.correctAnswer}"></i>
+
+            </ion-item>
+
+          </ion-list>
+
+        </div>
+
+        <!--<div>
+          <button class="button button-energized" ng-click="$ctrl.finish()">
+            test
+          </button>
+        </div>-->
+
+        <div class="item padding action-container"
+             ng-show="$ctrl.selectedAnswer">
+          <button class="button button-royal button-block"
+                  ng-click="$ctrl.submit(data)"
+                  ng-disabled=" !$ctrl.selectedAnswer || $ctrl.correctAnswer != null ">
+            Submit
+            <i class="icon ion-android-done padding"></i>
+          </button>
+        </div>
       </div>
 
-      <div class="item item-text-wrap padding">
+  </ion-content>
+  <ion-footer-bar class="bar-stable" >
 
-        <ion-list>
-          <ion-item class="item-icon-right"
-                    ng-class="{'selected': $ctrl.selectedAnswer == 'A'}"
-                    ng-click="$ctrl.selectAnswer(data, 'A')">
+    <button class="button button-assertive button-clear"
+            ng-show="$ctrl.currentQuestion != 0"
+            ng-click="$ctrl.previousQuestion()" >
+      <i class="ion-chevron-left" ></i >
+      &nbsp;Back
+    </button >
 
-            <div>{{data.OptA | optionFormat}}</div>
+    <countdown-timer
+      start-timer="{{$ctrl.startTimer}}"
+      stop-timer="{{$ctrl.stopTimer}}"></countdown-timer>
 
-            <i class="icon"
-               ng-show=" $ctrl.selectedAnswer == 'A' && data.answered.answered "
-               ng-class="{
-                'ion-close-round assertive': $ctrl.correctAnswer == false,
-                'ion-checkmark-round balanced': $ctrl.correctAnswer}"></i>
+    <button class="button button-balanced button-clear pull-right opacity-0"
+            ng-class=" {'show': $ctrl.correctAnswer != null } "
+            ng-if=" $ctrl.currentQuestion + 1 < $ctrl.data.length "
+            ng-click="$ctrl.nextQuestion()" >
+      Next
+      &nbsp;<i class="ion-chevron-right" ></i >
+    </button >
 
-          </ion-item>
-
-          <ion-item class="item-icon-right"
-                    ng-class="{'selected': $ctrl.selectedAnswer == 'B'}"
-                    ng-click="$ctrl.selectAnswer(data, 'B')">
-            <div>{{data.OptB | optionFormat}}</div>
-
-            <i class="icon"
-               ng-show=" $ctrl.selectedAnswer == 'B' && data.answered.answered "
-               ng-class="{
-                'ion-close-round assertive': $ctrl.correctAnswer == false,
-                'ion-checkmark-round balanced': $ctrl.correctAnswer}"></i>
-
-          </ion-item>
-
-          <ion-item class="item-icon-right"
-                    ng-class="{'selected': $ctrl.selectedAnswer == 'C'}"
-                    ng-click="$ctrl.selectAnswer(data, 'C')">
-            <div>{{data.OptC | optionFormat}}</div>
-
-            <i class="icon"
-               ng-show=" $ctrl.selectedAnswer == 'C' && data.answered.answered "
-               ng-class="{
-                'ion-close-round assertive': $ctrl.correctAnswer == false,
-                'ion-checkmark-round balanced': $ctrl.correctAnswer}"></i>
-
-          </ion-item>
-
-          <ion-item class="item-icon-right"
-                    ng-class="{'selected': $ctrl.selectedAnswer == 'D'}"
-                    ng-click="$ctrl.selectAnswer(data, 'D')">
-            <div>{{data.OptD | optionFormat}}</div>
-
-            <i class="icon"
-               ng-show=" $ctrl.selectedAnswer == 'D' && data.answered.answered "
-               ng-class="{
-                'ion-close-round assertive': $ctrl.correctAnswer == false,
-                'ion-checkmark-round balanced': $ctrl.correctAnswer}"></i>
-
-          </ion-item>
-
-          <ion-item class="item-icon-right"
-                    ng-class="{'selected': $ctrl.selectedAnswer == 'E'}"
-                    ng-click="$ctrl.selectAnswer(data, 'E')">
-            <div>{{data.OptE | optionFormat}}</div>
-
-            <i class="icon"
-               ng-show=" $ctrl.selectedAnswer == 'E' && data.answered.answered "
-               ng-class="{
-                'ion-close-round assertive': $ctrl.correctAnswer == false,
-                'ion-checkmark-round balanced': $ctrl.correctAnswer}"></i>
-
-          </ion-item>
-
-        </ion-list>
-
-      </div>
-
-      <!--<div>
-        <button class="button button-energized" ng-click="$ctrl.finish()">
-          test
-        </button>
-      </div>-->
-
-      <div class="item padding action-container"
-           ng-show="$ctrl.selectedAnswer">
-        <button class="button button-royal button-block"
-                ng-click="$ctrl.submit(data)"
-                ng-disabled=" !$ctrl.selectedAnswer || $ctrl.correctAnswer != null ">
-          Submit
-          <i class="icon ion-android-done padding"></i>
-        </button>
-      </div>
-    </div>
-
-    <ion-footer-bar class="bar-stable" >
-
-      <button class="button button-assertive button-clear"
-              ng-show="$ctrl.currentQuestion != 0"
-              ng-click="$ctrl.previousQuestion()" >
-        <i class="ion-chevron-left" ></i >
-        &nbsp;Back
-      </button >
-
-      <!--This is for testing modal -->
-      <!--<button class="button button-assertive button-clear"
-              ng-click="$ctrl.finish()">
-        view Modal
-      </button>-->
-
-      <countdown-timer
-                       start-timer="{{$ctrl.startTimer}}"
-                       stop-timer="{{$ctrl.stopTimer}}"></countdown-timer>
-
-      <button class="button button-balanced button-clear pull-right"
-              ng-show="$ctrl.currentQuestion + 1 < $ctrl.data.length "
-              ng-click="$ctrl.nextQuestion()" >
-        Next
-        &nbsp;<i class="ion-chevron-right" ></i >
-      </button >
-
-      <button class="button button-positive button-clear pull-right"
-              ng-show="$ctrl.currentQuestion + 1 == $ctrl.data.length"
-              ng-click="$ctrl.finish()" >
-        Get Result
-        &nbsp;<i class="ion-chevron-right" ></i >
-      </button >
-    </ion-footer-bar >
-
-</ion-content>
+    <button class="button button-positive button-clear pull-right opacity-0"
+            ng-class=" {'show': $ctrl.correctAnswer != null } "
+            ng-show="$ctrl.currentQuestion + 1 == $ctrl.data.length"
+            ng-click="$ctrl.finish()" >
+      Get Result
+      &nbsp;<i class="ion-chevron-right" ></i >
+    </button >
+  </ion-footer-bar >
 </ion-view>

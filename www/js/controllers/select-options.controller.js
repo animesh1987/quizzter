@@ -1,7 +1,7 @@
 var controller = function($scope, $ionicNavBarDelegate, $timeout){
   var vm = this;
 
-  vm.title = 'Home';
+  vm.title = 'Quizzter';
 
   console.log(vm);
 };

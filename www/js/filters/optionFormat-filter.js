@@ -1,6 +1,6 @@
 function optionFormat(){
   return  function(string){
-    return string.split('.').slice(1).join('.');
+    return string.split(/[.|)]/).slice(1).join('.');
   }
 }
 

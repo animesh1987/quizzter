@@ -15,10 +15,19 @@
 
   <ion-content class="has-header padding background-modal">
 
+    <div class="card padding text-align-center">
+      <span class="md-headline color-black-054 col">Quiz Completed In</span>
+      <div class="md-display-1">
+        <strong>
+          <span>{{::modalctrl.formatNumber(modalctrl.results.timetaken.minutes)}}</span>:<span>{{::modalctrl.formatNumber(modalctrl.results.timetaken.seconds)}}</span>
+        </strong>
+      </div>
+    </div>
+
     <div class="card padding results-container col">
       <div class="circle-container md-whiteframe-1dp col-offset-20">
         <div class="md-display-3 royal">
-          {{modalctrl.results.getCorrectAnswers().correctAnswer/modalctrl.results.getCorrectAnswers().totalQuestions * 100}}%
+          {{::modalctrl.results.getCorrectAnswers().percentage * 100}}%
         </div>
       </div>
 
@@ -39,14 +48,23 @@
 
     </div>
 
-    <div class="card padding text-align-center">
-        <span class="md-headline color-black-054 col">Quiz Completed In</span>
-        <div class="md-display-1">
-          <strong>
-            <span>{{::modalctrl.formatNumber(modalctrl.results.timetaken.minutes)}}</span>:<span>{{::modalctrl.formatNumber(modalctrl.results.timetaken.seconds)}}</span>
-          </strong>
-        </div>
+    <div class="list card">
+      <div class="item item-divider md-headline">
+        Review All Questions
+      </div>
+
+      <div class="item item-icon-right"
+        ng-repeat="question in ::modalctrl.results.resultData">
+        <span class="sidebar"
+              ng-class="{'in-correct': !question.answered.isCorrect,
+                   'correct': question.answered.isCorrect
+                  }">
+        </span>
+        <span>{{question.Question}}</span>
+        <i class="button button-icon icon ion-android-open" ng-click="modalctrl.showDetail(question, $event)"></i>
+      </div>
     </div>
+
   </ion-content>
 
 </ion-modal-view>

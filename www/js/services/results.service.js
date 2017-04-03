@@ -7,6 +7,8 @@ var resultService = function(){
 
     resultData: null,
 
+    resultModal: null,
+
     getCorrectAnswers: function () {
       console.log(this.resultData);
       var answered = _.pluck(this.resultData, 'answered');
@@ -14,7 +16,8 @@ var resultService = function(){
       return{
         totalQuestions: this.resultData.length,
         answered: answered.length,
-        correctAnswer: _.where(answered, {isCorrect: true}).length
+        correctAnswer: _.where(answered, {isCorrect: true}).length,
+        percentage: _.where(answered, {isCorrect: true}).length/this.resultData.length
       }
     }
   }

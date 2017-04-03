@@ -1,4 +1,4 @@
-var controller = function($scope, $state, questions, $ionicModal, resultFactory){
+var controller = function($scope, $state, questions, $ionicModal, resultFactory, $timeout){
 
   var vm = this;
 
@@ -30,6 +30,11 @@ var controller = function($scope, $state, questions, $ionicModal, resultFactory)
     },
     previousQuestion: function(){
       vm.currentQuestion = vm.currentQuestion - 1;
+      if(vm.data[vm.currentQuestion].answered.answered){
+        vm.correctAnswer = vm.data[vm.currentQuestion].answered.isCorrect;
+        vm.selectedAnswer = vm.data[vm.currentQuestion].answered.optionSelected;
+        return;
+      }
       vm.selectedAnswer = null;
     },
     selectAnswer: function(data, selection){
@@ -46,6 +51,7 @@ var controller = function($scope, $state, questions, $ionicModal, resultFactory)
       vm.correctAnswer = (data.Answer === vm.selectedAnswer) ? true : false;
       if(data.answered && !data.answered.answered){
         data.answered = {answered: true, optionSelected: vm.selectedAnswer, isCorrect: vm.correctAnswer};
+        console.log(data.answered && data.answered.answered);
         vm.totalAnswered++;
       }
       return
@@ -58,13 +64,14 @@ var controller = function($scope, $state, questions, $ionicModal, resultFactory)
         scope: $scope,
         animation: 'slide-in-up'
       }).then(function (modal) {
-        vm.modal = modal;
+        resultFactory.resultModal  = vm.modal = modal;
         vm.modal.show();
       });
     }
   });
 
   $scope.$on('$destroy', function() {
+    console.log('scope getting destroyed');
     vm.modal.hide();
     vm.modal.remove();
   });
