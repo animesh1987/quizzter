@@ -22,6 +22,8 @@ var controller = function($scope, $state, questions, $ionicModal, resultFactory,
   vm.startTimer = true;
   vm.stopTimer = false;
 
+  console.log(vm.data)
+
   _.extend(vm, {
     nextQuestion: function(){
       vm.currentQuestion = vm.currentQuestion + 1;
@@ -57,7 +59,6 @@ var controller = function($scope, $state, questions, $ionicModal, resultFactory,
       return
     },
     finish: function () {
-      //console.log(_.map(vm.data, function (data) {return data.answered}));
       vm.stopTimer = true;
       resultFactory.resultData = vm.data;
       $ionicModal.fromTemplateUrl('templates/result-modal.html', {
@@ -71,9 +72,10 @@ var controller = function($scope, $state, questions, $ionicModal, resultFactory,
   });
 
   $scope.$on('$destroy', function() {
-    console.log('scope getting destroyed');
-    vm.modal.hide();
-    vm.modal.remove();
+    if(vm.modal){
+      vm.modal.hide();
+      vm.modal.remove();
+    }
   });
 
 };

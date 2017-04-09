@@ -1,7 +1,15 @@
-var controller = function($scope, $ionicNavBarDelegate, $timeout){
+var controller = function($state){
   var vm = this;
 
-  vm.title = 'Quizzter';
+  vm.title = 'Select Quiz';
+
+  vm.Authfor500 = false;
+  vm.AuthforAll = false;
+
+  vm.unlockNow = function (type) {
+    console.log(type);
+  };
+
 
   console.log(vm);
 };

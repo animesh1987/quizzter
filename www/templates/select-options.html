@@ -8,22 +8,40 @@
       Answer 5 questions
     </button>
 
-    <button ui-sref="quick-quiz({questions: 10})"
+    <button ui-sref="quick-quiz({questions: 50})"
             nav-direction="forward"
             class="button button-balanced button-block">
-      Answer 10 questions
+      Answer 50 questions
     </button>
 
-    <button ui-sref="quick-quiz({questions: 20})"
-            nav-direction="forward"
+    <button nav-direction="forward"
             class="button button-assertive button-block">
-      Answer 20 questions
+      <div ng-show="!$ctrl.Authfor500"
+           ng-click="$ctrl.unlockNow(500)"
+           class="upgrade-button">
+        <div class="ribbon-container">
+          <div class="ribbon">
+            <i class="icon ion-locked"></i>
+            <span class="md-caption"><strong>  Unlock Now</strong></span>
+          </div>
+        </div>
+      </div>
+      Answer 500 questions
     </button>
 
-    <button ui-sref="quick-quiz({questions: 30})"
-            nav-direction="forward"
+    <button nav-direction="forward"
             class="button button-dark button-block">
-      Answer 30 questions
+      <div ng-show="!$ctrl.AuthforAll"
+           ng-click="$ctrl.unlockNow('All')"
+           class="upgrade-button">
+        <div class="ribbon-container">
+          <div class="ribbon">
+            <i class="icon ion-locked"></i>
+            <span class="md-caption"><strong>  Unlock Now</strong></span>
+          </div>
+        </div>
+      </div>
+      Answer All questions
     </button>
 
   </ion-content>

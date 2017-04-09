@@ -18,17 +18,48 @@ var resultModal = function($scope, resultFactory, $state, $ionicModal, $ionicPop
   vm.hide = function () {
     resultFactory.resultModal.hide();
     $ionicModal.stack.remove(resultFactory.resultModal);
-    $state.go('home');
+    $state.go('select-options');
     console.log('hide modal', $ionicModal);
   };
 
   vm.showDetail = function (question, $event) {
     console.log(question);
-    /*$ionicPopup.show(
-      template: "<div>{{vm.}}</div>"
-    )*/
+    var correctMessage = question.answered.isCorrect ? 'Correct' : 'Incorrect' ;
+    var popupTemplate = "<div class='col'>" +
+        "<div class='text-align-center'> <h1 class='title'> " + correctMessage + "</h1> </div>" +
+        "<div class='padding'>" + question.Question + " ? </div>" +
+        "<md-divider></md-divider>" +
+        "<div class='padding'><span><strong>You Selected:</strong></span> <span> " + question['Opt'+question.answered.optionSelected] + "</span></div>" +
+        "<div class='padding'><span><strong>Correct Answer:</strong></span> <span> " + question['Opt'+question.Answer] + " </span></div>" +
+        "<md-divider></md-divider>" +
+        "<div class='padding'> " + question.Explanation + " </div>" +
+      "</div>"
+    $ionicPopup.show({
+      template: popupTemplate,
+      title: 'Answer Summary',
+      cssClass: 'question-detail-popup',
+      buttons: [
+        {
+          text: '<b>Got It</b>',
+          type: 'button-assertive'
+        }
+      ]
+    })
   }
 
 };
 
 angular.module('quizzter').controller('ResultModal', resultModal)
+
+
+/*    var popupTemplate = "<div class='col'>" +
+ "<div class='text-align-center'> <h1 class='title'> " + correctMessage + "</h1> </div>" +
+ "<div class='padding'>" + question.Question + " ? </div>" +
+ "<md-divider></md-divider>" +
+ "<div class='padding'><span><strong>You Selected:</strong></span> <span> " + question.answered.optionSelected + "</span></div>" +
+ "<div class='md-caption'> " + question['Opt'+question.answered.optionSelected] + "</div>" +
+ "<div class='padding'><span><strong>Correct Answer:</strong></span> <span> " + question.Answer + " </span></div>" +
+ "<div class='md-caption'> " +question['Opt'+question.Answer] + "</div>" +
+ "<md-divider></md-divider>" +
+ "<div class='padding'> " + question.Explanation + " </div>" +
+ "</div>"*/

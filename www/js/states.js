@@ -6,6 +6,10 @@ angular.module('quizzter')
     $stateProvider
       .state('home', {
         url: '/',
+        templateUrl: "templates/welcome.html"
+      })
+      .state('select-options', {
+        url: '/select-options',
         templateUrl: "templates/select-options.html",
         controller: 'SelectOptionsController as $ctrl'
       })

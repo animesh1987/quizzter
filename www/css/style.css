@@ -51,7 +51,7 @@
 
 /*circle*/
 .results-container{ height:60%;}
-.circle-container{border: 10px solid #EF5350; width: 60%; height: 60%; border-radius: 50%; background-color: #fff; margin-top: 10%;}
+.circle-container{border: 10px solid #EF5350; width: 60%; height: 60%; border-radius: 50%; background-color: #fff; margin-top: 10%; box-shadow: 1px 0px 5px 0px rgba(50, 50, 50, 0.5);}
 .circle-container div{text-align: center; margin-top: 35%; font-weight: 300;}
 
 .background-modal{background: #F0F3F8;}
@@ -60,4 +60,44 @@
 .sidebar.in-correct{background: #F44336;}
 .sidebar.correct{background: #009688;}
 
+/*Popup custom*/
+.question-detail-popup .popup {width: 90%;background: white;}
+.question-detail-popup .popup .popup-head{background: #886aea; border-bottom: none;
+  box-shadow: 0 1px 3px 0 rgba(0,0,0,.2), 0 1px 1px 0 rgba(0,0,0,.14), 0 2px 1px -1px rgba(0,0,0,.12);}
+.question-detail-popup .popup .popup-head h3{color: white;}
+
+/*Upgrade Button*/
+.upgrade-button{z-index: 2; background: rgba(1,1,1,0.3);
+  position: absolute; top: -1px; bottom: 0; left: -1px; right: 0;}
+
+.upgrade-button .ribbon-container{position: absolute; top: -2px; left: -2px; overflow: hidden;height: 120px;}
+.upgrade-button .ribbon-container .ribbon{padding: 0 5px;
+  transform: rotate(-45deg); background-color: whitesmoke;
+  color: #F44336; position: relative;
+  top: 20px;
+  left: -53px;
+  width: 200px;}
+.upgrade-button .ribbon-container .ribbon::before{
+  content: "";
+  border-top: 3px solid whitesmoke;
+  border-left: 3px solid transparent;
+  border-right: 3px solid transparent;
+  position: absolute;
+  bottom: -3px;
+  left: 8px;}
+
+.upgrade-button .ribbon-container .ribbon::after{
+  content: "";
+  border-top: 3px solid whitesmoke;
+  border-left: 3px solid transparent;
+  border-right: 3px solid transparent;
+  position: absolute;
+  bottom: -3px;
+  right: 16px;;
+}
+/*.upgrade-button .ribbon{ transform: rotate(-45deg); background: white; color: #F44336;}
+
+
+.upgrade-button .ribbon::before{left: 0;}
+.upgrade-button .ribbon::after{right: 0;}*/
 
