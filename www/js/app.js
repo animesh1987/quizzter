@@ -15,11 +15,13 @@ angular.module('quizzter', ['ngMaterial', 'ui.router', 'ionic'])
         // a much nicer keyboard experience.
         cordova.plugins.Keyboard.disableScroll(true);
       }
-      console.log(window.StatusBar);
       if(window.StatusBar) {
         StatusBar.styleDefault();
         StatusBar.styleLightContent();
         StatusBar.backgroundColorByHexString("#a994f0");
+      }
+      if(navigator && navigator.splashscreen){
+        navigator.splashscreen.hide();
       }
     });
   })
